@@ -71,11 +71,23 @@ def calculateDiffhistg(image1, image2):
     diffhistg += cv2.compareHist(prevhistg,currhistg,cv2.HISTCMP_CORREL)
     return diffhistg
 
+def getMyWebcamIdx():
+    webcamfound = False
+    for i in range (0, 5):
+        msg = os.popen('udevadm info --query=all /dev/video'+str(i)+' | grep \'MODEL_ID\'').read()
+        if  'ID_MODEL_ID=4095' in msg:
+            webcamfound = True
+            break
+    if  webcamfound:
+        return i
+    else:
+        return -1
+
 def main():
     global previousimage
     counter = 0
     counterCheckDeleteOld = 0
-    cam = cv2.VideoCapture(1)
+    cam = cv2.VideoCapture(getMyWebcamIdx())
     cam.set(3,960)
     cam.set(4,720)
     while True:
