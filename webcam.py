@@ -39,7 +39,7 @@ def deleteOld():
     except ValueError as exception:
         consecutiveErrorsDeletingOld += 1
         print("There was an error retrieving the date of the oldest file on server.")
-        print("This has happened the last " + consecutiveErrorsDeletingOld + " times we have tried.") 
+        print("This has happened the last " + str(consecutiveErrorsDeletingOld) + " times we have tried.") 
     else:
         consecutiveErrorsDeletingOld = 0
         print('  oldestfiledatetime: ', oldestfiledatetime)
